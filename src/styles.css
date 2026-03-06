@@ -234,3 +234,11 @@ body,
 .hidden{
     display: none !important;
 }
+
+.hide{
+    padding: 0.1rem 0.3rem;
+}
+
+.hide:hover{
+    background-color:aqua;
+}
