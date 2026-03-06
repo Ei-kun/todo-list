@@ -41,10 +41,16 @@ body{
     gap: 0.5rem;
     padding: 0.5rem;
     border-radius: 6px;
+    transition: 0.2s;
 }
 
 .default > .tabs:hover{
     background-color: #031524;
+}
+
+.tabs.active{
+    background-color: #031524;
+    border-left: solid medium blue;
 }
 
 .default .image{
@@ -98,7 +104,10 @@ body,
 .default,
 .default > .tabs,
 .sidebar > .add,
-.add > .new-list{
+.add > .new-list,
+.content,
+.content > .heading,
+.heading > header{
     display: flex;
 }
 
@@ -147,12 +156,31 @@ body,
 
 .content{
     flex:4;
+    flex-direction: column;
     background-color: #031524;
     padding: 1rem;
 }
 
-.content > header{
-    height: 85vh;
+.content > .time{
+    color: #00efb0;
+    font-size:small;
+}
+
+.content > .tasks{
+    flex: 1;
+    color: #00efb0;
+}
+
+.content > .heading > header{
+    align-items: center;
+    gap: 1rem;
+    font-weight: bold;
+    font-size: xx-large;
+    color: #00efb0;
+}
+
+.content > .heading > header > .image{
+    height: 3rem;
 }
 
 .add-task{
