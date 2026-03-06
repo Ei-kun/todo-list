@@ -3,7 +3,7 @@ import path from "node:path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
 export default {
-  entry: "./src/tabListener.js",
+  entry: "./src/eventListener.js",
   output: {
     filename: "main.js",
     path: path.resolve(import.meta.dirname, "dist"),
@@ -23,6 +23,10 @@ export default {
       {
         test: /\.html$/i,
         use: ["html-loader"],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
       },
     ],
   },

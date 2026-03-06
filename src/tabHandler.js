@@ -6,8 +6,15 @@ export function tabChange(tab){
 
     const head=document.querySelector(".content").querySelector("header");
     head.innerHTML="";
-    if(heading.innerText!=="My Day")head.append(image.cloneNode(true));
-    head.append(heading.cloneNode(true));
+    if(!tab.classList.contains("today"))head.append(image.cloneNode(true));
+    if(heading.tagName !== "INPUT")head.append(heading.cloneNode(true));
+    else{
+        const container=document.createElement("div");
+        container.classList.add("tab-name");
+        container.innerText=heading.value;
+
+        head.append(container);
+    }
 
     const time=document.querySelector(".content").querySelector(".time");
     time.innerText="";
