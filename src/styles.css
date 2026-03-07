@@ -11,6 +11,7 @@ button{
 
 body{
     min-height: 100vh;
+    max-height: 100vh;
 }
 
 .account{
@@ -60,6 +61,7 @@ body{
 .sidebar > .custom{
     flex: 1;
     border: none;
+    overflow-y: auto;
 }
 
 .custom input{

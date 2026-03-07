@@ -17,6 +17,7 @@ export function newList(){
 
     const input=document.createElement("input");
     input.setAttribute("type","text");
+    input.setAttribute("maxLength","60");
     input.value="Untitled";
     input.classList.add("tab-name");
     

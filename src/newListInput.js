@@ -14,7 +14,8 @@ export function newListInput(input){
             heading.innerText="Untitled";
         }
         else{
-            container.innerText=input.value;
+            if(input.value.length > 20) container.innerText=`${input.value.substring(0,20)}...`;
+            else container.innerText=input.value;
             heading.innerText=input.value; 
         }
 
