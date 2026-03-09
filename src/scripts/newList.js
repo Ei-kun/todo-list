@@ -1,4 +1,7 @@
-export function newListInput(input){
+import defaultListIcon from "../images/default-list.svg";
+
+
+function newListAdd(input){
 
     function finalize(){
         const heading=document.querySelector("header").querySelector(".tab-name");
@@ -29,4 +32,36 @@ export function newListInput(input){
     input.addEventListener("keydown",(e)=>{
         if(e.key==="Enter") input.blur();
     });
+}
+
+export function newListCreate(){
+    const custom=document.querySelector(".custom");
+
+    const tabs=document.createElement("div");
+    tabs.classList.add("tabs");
+    tabs.classList.add("new");
+
+    const image=document.createElement("div");
+    image.classList.add("image");
+
+    const img=document.createElement("img");
+    img.setAttribute("src",defaultListIcon);
+    image.append(img);
+
+    const input=document.createElement("input");
+    input.setAttribute("type","text");
+    input.setAttribute("maxLength","60");
+    input.value="Untitled";
+    input.classList.add("tab-name");
+    
+    tabs.append(image);
+    tabs.append(input);
+
+    custom.append(tabs);
+
+    input.focus();
+    input.select();
+    tabs.click();
+
+    newListAdd(input);
 }

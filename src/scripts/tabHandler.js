@@ -1,6 +1,6 @@
 import {dayAndMonth} from "./exports"
 
-export function tabChange(tab){
+function tabChange(tab){
     const image= tab.querySelector(".image");
     const heading= tab.querySelector(".tab-name");
 
@@ -25,3 +25,9 @@ export function tabChange(tab){
 
     if(heading.innerText==="My Day") dayAndMonth(time);
 };
+
+export function tabClick(tab){
+    document.querySelectorAll(".tabs").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    tabChange(tab);
+}

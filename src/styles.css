@@ -14,6 +14,10 @@ body{
     max-height: 100vh;
 }
 
+.delete{
+    color: red !important;
+}
+
 .account{
     gap: 0.5rem;
 }
@@ -125,7 +129,10 @@ body,
 .add > .new-list,
 .content,
 .content > .heading,
-.heading > header{
+.heading > header,
+.add-task > .popup,
+.add-task > .popup > button,
+.add-task > .option{
     display: flex;
 }
 
@@ -202,6 +209,7 @@ body,
 }
 
 .add-task{
+    margin-top: auto;
     height: 3rem;
     background-color: #00efb0;
     padding: 0.5rem;
@@ -231,6 +239,63 @@ body,
     border: none;
     font-size: 1rem;
     background-color: #00efb0;
+}
+
+.add-task{
+    position: relative;
+}
+
+.add-task > .option{
+    align-items: center;
+    color: white;
+    font-size: medium;
+    gap: 0.2rem;
+}
+
+.add-task > .popup{
+    position: absolute;
+    bottom: 110%;
+    right: 0;
+    flex-direction: column;
+    gap: 0.3rem;
+    background: #274b5f;
+    border-radius: 8px;
+    padding: 10px;
+    width: 220px;
+}
+
+.add-task > .popup > button{
+    background-color: #031524;
+    color: #00efb0;
+    border-radius: 2px;
+    font-size: medium;
+    padding: 0.5rem 0.5rem;
+    transition: 0.2s;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.add-task > .popup > button:hover{
+    background-color: darkgrey;
+}
+
+.add-task > .popup > button > img{
+    height: 1.2rem;
+}
+
+.date-input{
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.deadline{
+    margin-left: auto;
+}
+
+.divider{
+    width: 100%;
+    border: solid thin #00efb0;
 }
 
 .hidden{

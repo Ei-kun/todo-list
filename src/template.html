@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo list</title>
+    <title>Todo List</title>
 </head>
 <body>
     <div class="sidebar">
         <div class="account">
-            <div class="account-photo"><img src="https://avatars.githubusercontent.com/u/231045566?v=4&size=64" alt="user photo"></div>
+            <div class="account-photo"><img src="images/profile-pic.jpg" alt="user photo"></div>
             <div class="account-details">
                 <div>Ei-kun</div>
                 <div>eikun@gmail.com</div>
@@ -55,15 +55,67 @@
             <header></header>
         </div>
         <div class="time"></div>
-        <div class="tasks">
-            <div>tasks</div>
-        </div>
+        <div class="tasks"></div>
         <div class="add-task">
             <button class="image"><img src="images/plus.svg"></button>
             <input type="text" placeholder="Add a task">
-            <button class="image hidden"><img src="images/calendar.svg"></button>
-            <button class="image hidden"><img src="images/alarm.svg"></button>
-            <button class="image hidden"><img src="images/calendar-repeat.svg"></button>
+            <button class="image hidden option due">
+                <img src="images/calendar.svg">
+                <div></div>
+            </button>
+            <div class="popup hidden">
+                <button>
+                    <img src="images/currentday.svg">
+                    <div class="button-value">Today</div>
+                    <div class="currentday deadline"></div>
+                </button>
+                <button>
+                    <img src="images/nextday.svg">
+                    <div class="button-value">Tomorrow</div>
+                    <div class="nextday deadline"></div>
+                </button>
+                <button class="next-week">
+                    <img src="images/nextweek.svg">
+                    <div class="button-value">Next Week</div>
+                    <div class="nextweek deadline"></div>
+                </button>
+                <div class="divider"></div>
+                <button class="pickDate">
+                    <img src="images/calendar.svg">
+                    <div class="button-value">Pick a Date</div>
+                    <input type="date" class="date-input">
+                </button>
+                <button class="delete hidden">
+                    <img src="images/delete.svg">
+                    <div>Remove due date</div>
+                </button>
+            </div>
+            <button class="image hidden option interval">
+                <img src="images/calendar-repeat.svg">
+                <div></div>
+            </button>
+            <div class="popup hidden">
+                <button>
+                    <img src="images/daily.svg">
+                    <div class="button-value">Daily</div>
+                </button>
+                <button>
+                    <img src="images/weekdays.svg">
+                    <div class="button-value">Weekdays</div>
+                </button>
+                <button>
+                    <img src="images/weekly.svg">
+                    <div class="button-value">Weekly</div>
+                </button>
+                <button>
+                    <img src="images/monthly.svg">
+                    <div class="button-value">Monthly</div>
+                </button>
+                <button class="hidden delete">
+                    <img src="images/delete.svg">
+                    <div>Never Repeat</div>
+                </button>
+            </div>
         </div>
     </div>
 </body>

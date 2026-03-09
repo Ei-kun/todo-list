@@ -1,4 +1,4 @@
-import {addTaskInput, newList,tabClick} from "./exports";
+import {inputIcon,newListCreate,tabClick,popUpShow,popUpBlur} from "./scripts/exports";
 import "./styles.css";
 
 
@@ -10,13 +10,25 @@ document.querySelectorAll(".default").forEach((container)=>{
 });
 
 document.querySelector(".new-list").addEventListener("click",()=>{
-    newList();
+    newListCreate();
 });
 
 const input=document.querySelector(".add-task").querySelector("input");
 
 input.addEventListener("input",()=>{
-    addTaskInput(input);
+    inputIcon(input);
+});
+
+document.querySelectorAll(".option").forEach(btn => {
+    btn.addEventListener("click", () => {
+        popUpShow(btn);
+    });
+});
+
+document.querySelectorAll(".option").forEach(btn => {
+    btn.addEventListener("blur", (e) => {
+        popUpBlur(btn,e.relatedTarget);
+    });
 });
 
 document.querySelector(".today").click();
