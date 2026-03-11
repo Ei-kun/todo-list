@@ -1,4 +1,4 @@
-import {inputIcon,newListCreate,tabClick,popUpShow,popUpBlur} from "./scripts/exports";
+import {inputIcon,newListCreate,tabClick,popUpShow,popUpBlur,addTask,addHoverEffect,removeHoverEffect, markIt} from "./scripts/exports";
 import "./styles.css";
 import "flatpickr/dist/themes/dark.css";
 
@@ -8,6 +8,10 @@ document.querySelectorAll(".default").forEach((container)=>{
         const tab=e.target.closest(".tabs");
         if(tab!==null)tabClick(tab);
     });
+});
+
+document.querySelector(".add-task > input").addEventListener("keydown",(e)=>{
+    if(e.key=="Enter") addTask(e.target);
 });
 
 document.querySelector(".new-list").addEventListener("click",()=>{
@@ -30,6 +34,20 @@ document.querySelectorAll(".option").forEach(btn => {
     btn.addEventListener("blur", (e) => {
         popUpBlur(btn,e.relatedTarget);
     });
+});
+
+const taskContainer = document.querySelector(".taskContainer");
+
+taskContainer.addEventListener("mouseover", (e) => {
+    addHoverEffect(e);
+});
+
+taskContainer.addEventListener("mouseout", (e) => {
+    removeHoverEffect(e);
+});
+
+taskContainer.addEventListener("click", (e) => {
+    markIt(e);
 });
 
 document.querySelector(".today").click();

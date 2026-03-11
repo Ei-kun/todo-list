@@ -132,7 +132,8 @@ body,
 .heading > header,
 .add-task > .popup,
 .add-task > .popup > button,
-.add-task > .option{
+.add-task > .option,
+.taskContainer > .task{
     display: flex;
 }
 
@@ -191,9 +192,39 @@ body,
     font-size:small;
 }
 
-.content > .tasks{
-    flex: 1;
-    color: #00efb0;
+.content > .taskContainer{
+    display: grid;
+    justify-items: stretch;
+    grid-template-columns: 1fr;
+    row-gap: 4px;
+    overflow-y: auto;
+    margin: 2rem;
+}
+
+.taskContainer > .task{
+    background-color: #274b5f;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 4px;
+    gap:1rem;
+}
+
+.task .task-detail{
+    color: white;
+}
+
+.task .image{
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.task .star,.task .markedStar{
+    margin-left: auto;
+}
+
+.task .image img{
+    height: 100%;
 }
 
 .content > .heading > header{
