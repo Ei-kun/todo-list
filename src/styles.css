@@ -133,7 +133,8 @@ body,
 .add-task > .popup,
 .add-task > .popup > button,
 .add-task > .option,
-.taskContainer > .task{
+.taskContainer > .task,
+.extrainfo{
     display: flex;
 }
 
@@ -225,6 +226,20 @@ body,
 
 .task .image img{
     height: 100%;
+}
+
+.extrainfo{
+    color: #F5F5DC;
+    align-items: center;
+    gap: 6px;
+}
+
+.extrainfo span{
+    font-size: x-small;
+}
+
+.extrainfo img{
+    height: 0.75rem;
 }
 
 .content > .heading > header{

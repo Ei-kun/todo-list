@@ -7,6 +7,8 @@ import markedCheckBox from "../images/markedCheckBox.svg";
 import star from "../images/star.svg";
 import highlightstar from "../images/highlightStar.svg";
 import markedStar from "../images/markedStar.svg";
+import repeat from "../images/repeat.svg";
+import extrainfocalendar from "../images/extrainfocalendar.svg"
 
 
 const calendar=flatpickr(".date-input",{
@@ -84,6 +86,9 @@ function triggerDeleteIcon(popup,btn){
 
 export function addTask(input){
     const taskContainer=document.querySelector(".taskContainer");
+    const due=document.querySelector(".due div");
+    const interval=document.querySelector(".interval div");
+    const deletebtn=document.querySelectorAll(".delete");
 
     const task=document.createElement("div");
     task.classList.add("task");
@@ -106,13 +111,38 @@ export function addTask(input){
     star.src=starImage;
     starContainer.append(star);
 
+    const extrainfo=document.createElement("div");
+    extrainfo.classList.add("extrainfo");
+    if(due.innerText!==""){
+        const image=document.createElement("img");
+        image.src=extrainfocalendar;
+
+        const text=document.createElement("span");
+        text.innerText=due.innerText;
+
+        extrainfo.append(image);
+        extrainfo.append(text);
+    }
+    if(interval.innerText!==""){
+        const image=document.createElement("img");
+        image.src=repeat;
+
+        extrainfo.append(image);
+    }
+
     task.append(checkBoxContainer);
     task.append(taskDetail);
+    task.append(extrainfo);
     task.append(starContainer);
     
     taskContainer.append(task);
 
     input.value="";
+    due.innerText="";
+    interval.innerText="";
+    deletebtn.forEach(btn =>{
+        btn.classList.add("hidden");
+    });
 }
 
 export function addHoverEffect(e){
