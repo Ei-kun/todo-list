@@ -1,5 +1,6 @@
 import {inputIcon,newListCreate,tabClick,popUpShow,popUpBlur} from "./scripts/exports";
 import "./styles.css";
+import "flatpickr/dist/themes/dark.css";
 
 
 document.querySelectorAll(".default").forEach((container)=>{

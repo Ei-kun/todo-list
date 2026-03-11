@@ -1,4 +1,15 @@
 import {today,tomorrow,nextWeek,selectDate} from "./myDay";
+import flatpickr from "flatpickr";
+
+
+const calendar=flatpickr(".date-input",{
+    position:"above",
+    positionElement:document.querySelector(".due"),
+    dateFormat: "Y-m-d",
+    onChange:function(selectedDates, dateStr, instance){
+        selectDate(dateStr);
+    }
+});
 
 export function inputIcon(input){
     if(input.value!==""){
@@ -42,21 +53,7 @@ function selectOption(popup,btn){
     const selectedOption=popup.previousElementSibling.querySelector("div");
 
     if(btn.classList.contains("pickDate")){
-        const dateInput = btn.querySelector(".date-input");
-
-        setTimeout(() => {
-            if (dateInput.showPicker) {
-                dateInput.showPicker();
-            } else {
-                dateInput.click();
-            }
-        }, 10);
-
-        dateInput.onchange = () => {
-            if (dateInput.value) {
-                selectedOption.innerText = selectDate(dateInput.value);
-            }
-        }
+        calendar.open();
     }
     else if(btn.classList.contains("next-week")){
         selectedOption.innerText=nextWeek();
@@ -71,9 +68,9 @@ function triggerDeleteIcon(popup,btn){
 
     if(btn.classList.contains("delete")){
         selectedOption.innerText="";
-        btn.classList.toggle("hidden");
+        btn.classList.add("hidden");
     }
-    else{
+    else if(selectedOption.innerText!==""){
         popup.querySelector(".delete").classList.remove("hidden");
     }
 }
