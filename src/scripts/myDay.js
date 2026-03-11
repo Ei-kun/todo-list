@@ -29,7 +29,7 @@ export function nextWeek(){
     const now=new Date();
     const next_week = new Date();
     next_week.setDate(now.getDate() + 7);
-    return selectDate(`${next_week.getFullYear()}-${next_week.getMonth()}-${next_week.getDate()}`);
+    selectDate(`${next_week.getFullYear()}-${next_week.getMonth()}-${next_week.getDate()}`);
 }
 
 export function selectDate(input){

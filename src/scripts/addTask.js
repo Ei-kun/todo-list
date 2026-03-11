@@ -56,7 +56,7 @@ function selectOption(popup,btn){
         calendar.open();
     }
     else if(btn.classList.contains("next-week")){
-        selectedOption.innerText=nextWeek();
+        nextWeek();
     }
     else if(!btn.classList.contains("delete")) selectedOption.innerText=btn.querySelector(".button-value").innerText;
 
