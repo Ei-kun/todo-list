@@ -144,10 +144,22 @@ export function markIt(e){
         e.target.closest(".checkBox").classList.add("markedCheckBox");
         e.target.closest(".checkBox").classList.remove("checkBox");
     }
-    if (e.target.closest(".star")) {
+    else if (e.target.closest(".star")) {
         const img = e.target.closest(".star").querySelector("img");
         img.src = markedStar;
         e.target.closest(".star").classList.add("markedStar");
         e.target.closest(".star").classList.remove("star");
+    }
+    else if (e.target.closest(".markedCheckBox")) {
+        const img = e.target.closest(".markedCheckBox").querySelector("img");
+        img.src = emptyCheckBox;
+        e.target.closest(".markedCheckBox").classList.add("checkBox");
+        e.target.closest(".markedCheckBox").classList.remove("markedCheckBox");
+    }
+    else if (e.target.closest(".markedStar")) {
+        const img = e.target.closest(".markedStar").querySelector("img");
+        img.src = star;
+        e.target.closest(".markedStar").classList.add("star");
+        e.target.closest(".markedStar").classList.remove("markedStar");
     }
 }
