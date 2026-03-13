@@ -32,7 +32,7 @@ export function nextWeek(){
     selectDate(`${next_week.getFullYear()}-${next_week.getMonth()}-${next_week.getDate()}`);
 }
 
-export function selectDate(input){
+export function selectDate(input,changeTab=false){
     if(input==="") return;
     const selectedDate=document.querySelector(".due").querySelector("div");
 
@@ -51,8 +51,16 @@ export function selectDate(input){
     const month=months[dateInput.getMonth()];
     const year=dateInput.getFullYear();
 
-    if(dateInput.toDateString()===now.toDateString()) selectedDate.innerText= "Today";
-    else if (dateInput.toDateString() === tomorrow.toDateString()) selectedDate.innerText= "Tomorrow";
-    else if(now.getFullYear()===year) selectedDate.innerText= `${day.substring(0,3)}, ${month.substring(0,3)} ${date}`;
-    else selectedDate.innerText= `${day.substring(0,3)}, ${month.substring(0,3)} ${date}, ${year}`;
+    if(changeTab){
+        if(dateInput.toDateString()===now.toDateString()) return "Today";
+        else if (dateInput.toDateString() === tomorrow.toDateString()) return "Tomorrow";
+        else if(now.getFullYear()===year) return `${day.substring(0,3)}, ${month.substring(0,3)} ${date}`;
+        else return `${day.substring(0,3)}, ${month.substring(0,3)} ${date}, ${year}`;
+    }
+    else{
+        if(dateInput.toDateString()===now.toDateString()) selectedDate.innerText= "Today";
+        else if (dateInput.toDateString() === tomorrow.toDateString()) selectedDate.innerText= "Tomorrow";
+        else if(now.getFullYear()===year) selectedDate.innerText= `${day.substring(0,3)}, ${month.substring(0,3)} ${date}`;
+        else selectedDate.innerText= `${day.substring(0,3)}, ${month.substring(0,3)} ${date}, ${year}`;
+    }
 }

@@ -232,7 +232,74 @@ export function markIt(e){
 
                 const importantTab=document.querySelector(".important");
                 data[importantTab.id].tasks=data[importantTab.id].tasks.filter(object => object.id!==task.id);
+
+                if(document.querySelector(".active").classList.contains("important")){
+                    currentTask.remove();
+                }
             }
         });
     }
+}
+
+export function displayTasks(tab){
+    const taskContainer=document.querySelector(".taskContainer");
+    taskContainer.innerText="";
+
+    if(tab.querySelector("input")) return;
+
+    data[tab.id].tasks.forEach(object =>{
+        const task=document.createElement("div");
+        task.classList.add("task");
+        task.id=object.id;
+    
+        const checkBoxContainer=document.createElement("div");
+        const checkBox=document.createElement("img");
+        checkBoxContainer.classList.add("image");
+        checkBoxContainer.classList.add("checkBox");
+        checkBox.src=emptyCheckBox;
+        checkBoxContainer.append(checkBox);
+    
+        const taskDetail=document.createElement("div");
+        taskDetail.classList.add("task-detail");
+        taskDetail.innerText=object.task;
+    
+        const starContainer=document.createElement("div");
+        const star=document.createElement("img");
+        starContainer.classList.add("image");
+        if(object.important===true){
+            star.src=markedStar;
+            starContainer.classList.add("markedStar");
+        }
+        else{
+            star.src=starImage;
+            starContainer.classList.add("star");
+        }
+        starContainer.append(star);
+    
+        const extrainfo=document.createElement("div");
+        extrainfo.classList.add("extrainfo");
+        if(object.due!==""){
+            const image=document.createElement("img");
+            image.src=extrainfocalendar;
+    
+            const text=document.createElement("span");
+            text.innerText=selectDate(object.due,true);
+    
+            extrainfo.append(image);
+            extrainfo.append(text);
+        }
+        if(object.repeat!==""){
+            const image=document.createElement("img");
+            image.src=repeat;
+    
+            extrainfo.append(image);
+        }
+    
+        task.append(checkBoxContainer);
+        task.append(taskDetail);
+        task.append(extrainfo);
+        task.append(starContainer);
+        
+        taskContainer.append(task);
+    });
 }

@@ -1,4 +1,4 @@
-import {dayAndMonth} from "./exports"
+import {dayAndMonth,displayTasks} from "./exports"
 
 function tabChange(tab){
     const image= tab.querySelector(".image");
@@ -24,6 +24,8 @@ function tabChange(tab){
     else placeholder.setAttribute("placeholder","Add a Task");
 
     if(heading.innerText==="My Day") dayAndMonth(time);
+
+    displayTasks(tab);
 };
 
 export function tabClick(tab){
