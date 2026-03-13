@@ -1,4 +1,4 @@
-import {today,tomorrow,nextWeek,selectDate} from "./myDay";
+import {today,tomorrow,nextWeek,selectDate,data} from "./exports";
 import flatpickr from "flatpickr";
 import starImage from "../images/star.svg";
 import emptyCheckBox from "../images/emptyCheckBox.svg";
@@ -10,6 +10,18 @@ import markedStar from "../images/markedStar.svg";
 import repeat from "../images/repeat.svg";
 import extrainfocalendar from "../images/extrainfocalendar.svg"
 
+class Task{
+    constructor(id,task,repeat,due,important){
+        this.id=id;
+        this.task=task;
+        this.repeat=repeat;
+        this.due=due;
+        this.important=important;
+    }
+}
+
+let selectedDate="";
+
 
 const calendar=flatpickr(".date-input",{
     position:"above",
@@ -17,6 +29,7 @@ const calendar=flatpickr(".date-input",{
     dateFormat: "Y-m-d",
     onChange:function(selectedDates, dateStr, instance){
         selectDate(dateStr);
+        selectedDate=dateStr;
     }
 });
 
@@ -85,6 +98,9 @@ function triggerDeleteIcon(popup,btn){
 }
 
 export function addTask(input){
+    const inputVal=input.value.trim();
+    if(inputVal=="") return;
+
     const taskContainer=document.querySelector(".taskContainer");
     const due=document.querySelector(".due div");
     const interval=document.querySelector(".interval div");
@@ -102,7 +118,7 @@ export function addTask(input){
 
     const taskDetail=document.createElement("div");
     taskDetail.classList.add("task-detail");
-    taskDetail.innerText=input.value;
+    taskDetail.innerText=inputVal;
 
     const starContainer=document.createElement("div");
     const star=document.createElement("img");
@@ -137,6 +153,12 @@ export function addTask(input){
     
     taskContainer.append(task);
 
+    const currentTabId=document.querySelector(".active").id;
+    const taskId=crypto.randomUUID();
+    task.id=taskId;
+    const taskObject=new Task(task.id,inputVal,interval.innerText,selectedDate,false);
+    data[currentTabId].tasks.push(taskObject);
+
     input.value="";
     due.innerText="";
     interval.innerText="";
@@ -168,6 +190,9 @@ export function removeHoverEffect(e){
 }
 
 export function markIt(e){
+    const currentTask=e.target.closest(".task");
+    const currentTab=document.querySelector(".active");
+
     if (e.target.closest(".checkBox")) {
         const img = e.target.closest(".checkBox").querySelector("img");
         img.src = markedCheckBox;
@@ -179,6 +204,15 @@ export function markIt(e){
         img.src = markedStar;
         e.target.closest(".star").classList.add("markedStar");
         e.target.closest(".star").classList.remove("star");
+
+        data[currentTab.id].tasks.forEach(task =>{
+            if(task.id===currentTask.id){
+                task.important=true;
+
+                const importantTab=document.querySelector(".important");
+                data[importantTab.id].tasks.push(task);
+            }
+        });
     }
     else if (e.target.closest(".markedCheckBox")) {
         const img = e.target.closest(".markedCheckBox").querySelector("img");
@@ -191,5 +225,14 @@ export function markIt(e){
         img.src = star;
         e.target.closest(".markedStar").classList.add("star");
         e.target.closest(".markedStar").classList.remove("markedStar");
+
+        data[currentTab.id].tasks.forEach(task =>{
+            if(task.id===currentTask.id){
+                task.important=false;
+
+                const importantTab=document.querySelector(".important");
+                data[importantTab.id].tasks=data[importantTab.id].tasks.filter(object => object.id!==task.id);
+            }
+        });
     }
 }

@@ -1,11 +1,20 @@
 import defaultListIcon from "../images/default-list.svg";
+import {data} from "./exports";
 
+
+function addCategory(id,category){
+    data[id]={
+        name:category,
+        tasks:[],
+    };
+}
 
 function newListAdd(input){
 
     function finalize(){
         const heading=document.querySelector("header").querySelector(".tab-name");
         const tab=input.closest(".tabs");
+        tab.id=crypto.randomUUID();
         
         const container=document.createElement("div");
         container.classList.add("tab-name");
@@ -21,6 +30,8 @@ function newListAdd(input){
             else container.innerText=input.value;
             heading.innerText=input.value; 
         }
+
+        addCategory(tab.id,input.value);
 
         tab.querySelector("input").remove();
         tab.append(container);
