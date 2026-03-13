@@ -1,7 +1,8 @@
-import {inputIcon,newListCreate,tabClick,popUpShow,popUpBlur,addTask,addHoverEffect,removeHoverEffect, markIt} from "./scripts/exports";
+import {inputIcon,newListCreate,tabClick,popUpShow,popUpBlur,addTask,addHoverEffect,removeHoverEffect,markIt,update} from "./scripts/exports";
 import "./styles.css";
 import "flatpickr/dist/themes/dark.css";
 
+console.log("Type : resetStorage() to reset localStorage");
 export let data={};
 
 if(localStorage.getItem("data")!==null){
@@ -30,6 +31,14 @@ else{
             tasks:[],
         },
     }
+}
+
+update(data);
+
+window.resetStorage= function(){
+    localStorage.removeItem("data");
+    data={};
+    window.location.reload();
 }
 
 document.querySelectorAll(".default").forEach((container)=>{
@@ -82,5 +91,5 @@ taskContainer.addEventListener("click", (e) => {
 document.querySelector(".today").click();
 
 window.addEventListener("beforeunload",() => {
-    localStorage.setItem("data",JSON.stringify(data));
+    if(Object.keys(data).length !== 0)localStorage.setItem("data",JSON.stringify(data));
 });

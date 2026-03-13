@@ -7,6 +7,11 @@
 
 button{
     border: none;
+    cursor: pointer;
+}
+
+.plus{
+    cursor: default;
 }
 
 body{
@@ -47,6 +52,7 @@ body{
     padding: 0.5rem;
     border-radius: 6px;
     transition: 0.2s;
+    cursor: pointer;
 }
 
 .default > .tabs:hover{
@@ -55,7 +61,7 @@ body{
 
 .tabs.active{
     background-color: #031524;
-    border-left: solid medium blue;
+    border-left: solid medium #00efb0; 
 }
 
 .default .image{
@@ -95,6 +101,7 @@ body{
     flex: 1;
     padding: 0.5rem;
     border-radius: 6px;
+    cursor: pointer;
 }
 
 .add > .new-list:hover{
@@ -218,6 +225,7 @@ body,
     display: flex;
     align-items: center;
     height: 100%;
+    cursor: pointer;
 }
 
 .task .star,.task .markedStar{
@@ -232,6 +240,10 @@ body,
     color: #F5F5DC;
     align-items: center;
     gap: 6px;
+}
+
+.pending{
+    color:red !important;
 }
 
 .extrainfo span{

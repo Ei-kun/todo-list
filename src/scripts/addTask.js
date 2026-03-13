@@ -9,6 +9,7 @@ import highlightstar from "../images/highlightStar.svg";
 import markedStar from "../images/markedStar.svg";
 import repeat from "../images/repeat.svg";
 import extrainfocalendar from "../images/extrainfocalendar.svg"
+import pending from "../images/pending.svg";
 
 class Task{
     constructor(id,task,repeat,due,important,complete){
@@ -102,6 +103,7 @@ export function addTask(input){
     const inputVal=input.value.trim();
     if(inputVal=="") return;
 
+    const currentTab=document.querySelector(".active");
     const taskContainer=document.querySelector(".taskContainer");
     const due=document.querySelector(".due div");
     const interval=document.querySelector(".interval div");
@@ -124,8 +126,14 @@ export function addTask(input){
     const starContainer=document.createElement("div");
     const star=document.createElement("img");
     starContainer.classList.add("image");
-    starContainer.classList.add("star");
-    star.src=starImage;
+    if(currentTab.classList.contains("important")){
+        starContainer.classList.add("markedStar");
+        star.src=markedStar;
+    }
+    else{
+        starContainer.classList.add("star");
+        star.src=starImage;
+    }
     starContainer.append(star);
 
     const extrainfo=document.createElement("div");
@@ -139,6 +147,16 @@ export function addTask(input){
 
         extrainfo.append(image);
         extrainfo.append(text);
+        
+
+        const now = new Date();
+        const selected = new Date(selectedDate);
+        now.setHours(0, 0, 0, 0);
+        selected.setHours(0, 0, 0, 0);
+        if(selected<now){
+            extrainfo.classList.add("pending");
+            image.src=pending;
+        }
     }
     if(interval.innerText!==""){
         const image=document.createElement("img");
@@ -154,11 +172,11 @@ export function addTask(input){
     
     taskContainer.append(task);
 
-    const currentTabId=document.querySelector(".active").id;
     const taskId=crypto.randomUUID();
     task.id=taskId;
     const taskObject=new Task(task.id,inputVal,interval.innerText,selectedDate,false,false);
-    data[currentTabId].tasks.push(taskObject);
+    if(currentTab.classList.contains("important")) taskObject.important=true;
+    data[currentTab.id].tasks.push(taskObject);
 
     input.value="";
     due.innerText="";
@@ -317,7 +335,18 @@ export function displayTasks(tab){
     
             extrainfo.append(image);
             extrainfo.append(text);
-        }
+        
+            if(!tab.classList.contains("complete")){
+                const now = new Date();
+                const selected = new Date(object.due);
+                now.setHours(0, 0, 0, 0);
+                selected.setHours(0, 0, 0, 0);
+                if(selected<now){
+                    extrainfo.classList.add("pending");
+                    image.src=pending;
+                }
+            }
+    }
         if(object.repeat!==""){
             const image=document.createElement("img");
             image.src=repeat;
