@@ -3,6 +3,8 @@ import {dayAndMonth,displayTasks} from "./exports"
 function tabChange(tab){
     const image= tab.querySelector(".image");
     const heading= tab.querySelector(".tab-name");
+    if(tab.classList.contains("complete")) document.querySelector(".add-task").classList.add("hidden");
+    else document.querySelector(".add-task").classList.remove("hidden");
 
     const head=document.querySelector(".content").querySelector("header");
     head.innerHTML="";

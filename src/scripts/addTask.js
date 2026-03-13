@@ -11,12 +11,13 @@ import repeat from "../images/repeat.svg";
 import extrainfocalendar from "../images/extrainfocalendar.svg"
 
 class Task{
-    constructor(id,task,repeat,due,important){
+    constructor(id,task,repeat,due,important,complete){
         this.id=id;
         this.task=task;
         this.repeat=repeat;
         this.due=due;
         this.important=important;
+        this.complete=complete;
     }
 }
 
@@ -156,7 +157,7 @@ export function addTask(input){
     const currentTabId=document.querySelector(".active").id;
     const taskId=crypto.randomUUID();
     task.id=taskId;
-    const taskObject=new Task(task.id,inputVal,interval.innerText,selectedDate,false);
+    const taskObject=new Task(task.id,inputVal,interval.innerText,selectedDate,false,false);
     data[currentTabId].tasks.push(taskObject);
 
     input.value="";
@@ -198,6 +199,16 @@ export function markIt(e){
         img.src = markedCheckBox;
         e.target.closest(".checkBox").classList.add("markedCheckBox");
         e.target.closest(".checkBox").classList.remove("checkBox");
+
+        data[currentTab.id].tasks.forEach(task =>{
+            if(task.id===currentTask.id){
+                task.complete=true;
+
+                const completeTab=document.querySelector(".complete");
+                data[completeTab.id].tasks.push(task);
+                currentTask.remove();
+            }
+        });
     }
     else if (e.target.closest(".star")) {
         const img = e.target.closest(".star").querySelector("img");
@@ -219,6 +230,17 @@ export function markIt(e){
         img.src = emptyCheckBox;
         e.target.closest(".markedCheckBox").classList.add("checkBox");
         e.target.closest(".markedCheckBox").classList.remove("markedCheckBox");
+
+        data[currentTab.id].tasks.forEach(task =>{
+            if(task.id===currentTask.id){
+                task.complete=false;
+
+                const completeTab=document.querySelector(".complete");
+                data[completeTab.id].tasks=data[completeTab.id].tasks.filter(object => object.id!==task.id);
+
+                currentTask.remove();
+            }
+        });
     }
     else if (e.target.closest(".markedStar")) {
         const img = e.target.closest(".markedStar").querySelector("img");
@@ -248,6 +270,8 @@ export function displayTasks(tab){
     if(tab.querySelector("input")) return;
 
     data[tab.id].tasks.forEach(object =>{
+        if(!tab.classList.contains("complete") && object.complete) return;
+
         const task=document.createElement("div");
         task.classList.add("task");
         task.id=object.id;
@@ -255,8 +279,14 @@ export function displayTasks(tab){
         const checkBoxContainer=document.createElement("div");
         const checkBox=document.createElement("img");
         checkBoxContainer.classList.add("image");
-        checkBoxContainer.classList.add("checkBox");
-        checkBox.src=emptyCheckBox;
+        if(object.complete){
+            checkBox.src=markedCheckBox;
+            checkBoxContainer.classList.add("markedCheckBox")
+        }
+        else{
+            checkBox.src=emptyCheckBox;
+            checkBoxContainer.classList.add("checkBox");
+        }
         checkBoxContainer.append(checkBox);
     
         const taskDetail=document.createElement("div");
